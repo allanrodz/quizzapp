@@ -8,13 +8,13 @@ body{
     background: #ffffff;
 }
 .app{
-    background: #eea322;
+    background: #ffffff;
     width: 90%;
     max-width: 600px;
     margin: 80px auto 0;
     border-radius: 10px;
-    padding: 30px;
-    border: 2px solid #030303;
+    padding: 20px;
+    border: 0px solid #ffffff;
 
 }
 .app h1{
@@ -33,8 +33,8 @@ body{
     font-weight: 600;
 }
 .btn{
-    background: #fff;
-    color: #222;
+    background: #fda21a;
+    color: #fefefe;
     font-weight: 500;
     width: 100%;
     border: 1px solid #222;
