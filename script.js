@@ -153,14 +153,16 @@ function showQuestion() {
         const button = document.createElement("button");
         button.innerText = answer.text;
         button.classList.add("btn", "btn-secondary", "mb-2");
+        // Set data-correct attribute based on the answer's correctness
+        button.dataset.correct = answer.correct;
         button.addEventListener('click', () => selectAnswer(answer.correct, button));
         answerButtonsElement.appendChild(button);
     });
-
-    document.getElementById('next-btn').style.display = 'none';
+    
 }
 
 function selectAnswer(correct, button) {
+    // Play sound based on the correctness of the selected answer
     if (correct) {
         score++;
         dingSound();
@@ -170,14 +172,24 @@ function selectAnswer(correct, button) {
         button.classList.add('incorrect');
     }
 
-    // Disable all answer buttons after selection
-    document.querySelectorAll('.answer-btn').forEach(btn => {
+    // Iterate over all answer buttons to reveal correct and incorrect answers
+    const answerButtonsElement = document.getElementById("answer-buttons");
+    Array.from(answerButtonsElement.children).forEach(btn => {
+        // Disable the button
         btn.disabled = true;
+
+        // Reveal which buttons are correct or incorrect
+        if (btn.dataset.correct === "true") {
+            btn.classList.add("correct");
+        } else {
+            btn.classList.add("incorrect");
+        }
     });
 
-    // Show next button
+    // Show the next button
     document.getElementById('next-btn').style.display = 'block';
 }
+
 
 
 document.getElementById('next-btn').addEventListener('click', () => {

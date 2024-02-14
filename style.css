@@ -18,7 +18,7 @@
 }
 
 .timer-yellow {
-    background-color: #FFEB3B; /* Amber/Yellow */
+    background-color: #ffad3b; /* Amber*/
 }
 
 .timer-red {
@@ -111,12 +111,12 @@ body{
     display: block;
 }
 
-.correct {
+.quiz .btn.correct {
     background-color: green;
     color: white;
 }
 
-.incorrect {
+.quiz .btn.incorrect {
     background-color: red;
     color: white;
 }
