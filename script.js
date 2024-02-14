@@ -179,6 +179,7 @@ function selectAnswer(correct, button) {
     document.getElementById('next-btn').style.display = 'block';
 }
 
+
 document.getElementById('next-btn').addEventListener('click', () => {
     currentQuestionIndex++;
     showQuestion();
