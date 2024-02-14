@@ -7,7 +7,7 @@
     color: white;
     font-weight: bold;
     border-radius: 25px; /* Adjust the border radius to control roundness */
-    background-color: #F44336; /* Red background color */
+    background-color: #fcfafa; /* Red background color */
     text-align: center; /* Center the text horizontally */
     line-height: 50px; /* Center the text vertically within the button */
 }
