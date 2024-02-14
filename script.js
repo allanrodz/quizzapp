@@ -91,108 +91,179 @@ const questions = [
         },
 ];
 
-
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
- 
 let currentQuestionIndex = 0;
 let score = 0;
-
-function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHTML = "Next";
-    showQuestion();
-}
-
-function showQuestion(){
-    resetState();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
-
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButtons.appendChild(button);
-        if(answer.correct){
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click", selectAnswer);
-    });
-}
+let timer;
+let timeLeft = 30; // 30 seconds for the countdown
 
 
-function resetState(){
-    nextButton.style.display = "none";
-    while(answerButtons.firstChild){
-        answerButtons.removeChild(answerButtons.firstChild);
-    }
-}
-
-function dingSound(){
-    let ding = new Audio ('sounds/ding.mp3');
-    ding.play();
-}
-
-function wrongSound(){
-    let wrong = new Audio ('sounds/wrong-answer.mp3');
-    wrong.play();
-}
-
-
-function selectAnswer(e){
-    const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === "true";
-    if(isCorrect){
-        dingSound();
-        selectedBtn.classList.add("correct"); 
-        score++;
-    }else{
-        wrongSound();
-        selectedBtn.classList.add("incorrect");
-    }
-    Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === "true"){
-            button.classList.add("correct");
-        }
-        button.disabled = true;
-    });
-    nextButton.style.display = "block";
-
-}
-
-
-function showScore(){
-    resetState();
-    let userScore = `You scored ${score} out of ${questions.length}.`;
-    questionElement.innerHTML = userScore;
-    questionElement.style.textAlign = "center"; // Align the text at the center
-    nextButton.innerHTML = "Play Again?";
-    nextButton.style.display = "block";
-    
-}
-
-
-function handleNextButton(){
-    currentQuestionIndex++;
-    if(currentQuestionIndex < questions.length){
-        showQuestion();
-    }else{
-        showScore();
-    }
-}
-
-
-nextButton.addEventListener("click", ()=>{
-    if(currentQuestionIndex < questions.length){
-        handleNextButton();
-    }else{
-        startQuiz();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('start-btn').addEventListener('click', startQuiz);
+    document.getElementById('leaderboard-overlay').addEventListener('click', hideLeaderboard);
+    // Prevent the overlay from closing when clicking inside the leaderboard
+    document.querySelector('.leaderboard').addEventListener('click', (e) => e.stopPropagation());
 });
 
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('start-btn').style.display = 'none';
+    document.querySelector('.quiz').style.display = 'block';
+    showQuestion();
+    timeLeft = 30; // Reset the timer each time the quiz starts
+    timer = setInterval(updateTimer, 1000); // Start the timer, calling updateTimer every second
+}
 
-startQuiz();
+function updateTimer() {
+    timeLeft--;
+    const timerElement = document.getElementById('timer');
+    timerElement.innerText = `Time Left: ${timeLeft}s`;
+
+    // Clear previous classes
+    timerElement.classList.remove('timer-green', 'timer-yellow', 'timer-red', 'timer-blink');
+
+    // Apply new class based on the time left
+    if (timeLeft > 20) {
+        timerElement.classList.add('timer-green');
+    } else if (timeLeft > 10 && timeLeft <= 20) {
+        timerElement.classList.add('timer-yellow');
+    } else if (timeLeft > 5 && timeLeft <= 10) {
+        timerElement.classList.add('timer-red');
+    } else if (timeLeft <= 5) {
+        timerElement.classList.add('timer-red', 'timer-blink');
+    }
+
+    if (timeLeft <= 0) {
+        clearInterval(timer); // Stop the timer
+        endGame(); // End the game when time runs out
+    }
+}
+
+
+
+
+function showQuestion() {
+    const question = questions[currentQuestionIndex];
+    const questionElement = document.getElementById("question");
+    questionElement.innerHTML = `Question ${currentQuestionIndex + 1}: ${question.question}`;
+    const answerButtonsElement = document.getElementById("answer-buttons");
+    answerButtonsElement.innerHTML = '';
+
+    question.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("btn", "btn-secondary", "mb-2");
+        button.addEventListener('click', () => selectAnswer(answer.correct, button));
+        answerButtonsElement.appendChild(button);
+    });
+
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function selectAnswer(correct, button) {
+    if (correct) {
+        score++;
+        dingSound();
+        button.classList.add('correct');
+    } else {
+        wrongSound();
+        button.classList.add('incorrect');
+    }
+
+    // Disable all answer buttons after selection
+    document.querySelectorAll('.answer-btn').forEach(btn => {
+        btn.disabled = true;
+    });
+
+    // Show next button
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+document.getElementById('next-btn').addEventListener('click', () => {
+    currentQuestionIndex++;
+    showQuestion();
+});
+
+function endGame() {
+    clearInterval(timer); // Stop the timer
+    // Hide the quiz container
+    document.querySelector('.quiz').style.display = 'none';
+
+    // Prompt for username and save score
+    const username = prompt("Enter your username to save your score:");
+    if (username) saveScore(username, score);
+
+    // Prepare the Game Over section
+    const gameOverSection = document.getElementById('game-over');
+    gameOverSection.innerHTML = `
+        <div style="text-align: center;">
+            <h2>Your score: ${score} out of ${questions.length}</h2>
+            <button class="btn btn-info" onclick="restartQuiz()">Play Again</button>
+            <button class="btn btn-secondary" onclick="showLeaderboardOverlay()">Leaderboard</button>
+        </div>
+    `;
+
+    // Show the Game Over section
+    gameOverSection.style.display = 'block';
+}
+
+function restartQuiz() {
+    document.getElementById('game-over').style.display = 'none'; // Hide game over section
+    startQuiz(); // Restart the quiz
+}
+
+
+
+function displayEndGameOptions() {
+    // Optionally prompt for username and save score here if needed
+    document.getElementById('game-over').style.display = 'block';
+}
+
+function saveScore(username, score) {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    leaderboard.push({ username, score });
+    // Sort the leaderboard by score in descending order
+    leaderboard.sort((a, b) => b.score - a.score);
+    // Optional: Keep only the top 5 scores, or adjust the number as needed
+    const updatedLeaderboard = leaderboard.slice(0, 5);
+    localStorage.setItem('leaderboard', JSON.stringify(updatedLeaderboard));
+    displayLeaderboard(); // Refresh the leaderboard display
+}
+
+
+function showLeaderboardOverlay() {
+    const overlay = document.getElementById('leaderboard-overlay');
+    overlay.style.display = 'flex';
+    displayLeaderboard(); // Make sure this function populates the leaderboard
+}
+
+
+function hideLeaderboard() {
+    document.getElementById('leaderboard-overlay').style.display = 'none';
+}
+
+
+function displayLeaderboard() {
+    const leaderboardDiv = document.querySelector('#leaderboard-overlay .leaderboard');
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    let leaderboardHTML = '<h2>Leaderboard</h2><table class="table"><thead><tr><th>Rank</th><th>Username</th><th>Score</th></tr></thead><tbody>';
+    
+    leaderboard.forEach((entry, index) => {
+        leaderboardHTML += `<tr><td>${index + 1}</td><td>${entry.username}</td><td>${entry.score}</td></tr>`;
+    });
+    
+    leaderboardHTML += '</tbody></table>';
+    leaderboardDiv.innerHTML = leaderboardHTML;
+}
+
+
+// Sounds
+function dingSound() {
+    const sound = new Audio('sounds/ding.mp3');
+    sound.play();
+}
+
+function wrongSound() {
+    const sound = new Audio('sounds/wrong-answer.mp3');
+    sound.play();
+}
