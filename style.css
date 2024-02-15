@@ -102,8 +102,8 @@ body{
 }
 
 #next-btn, #game-over button{
-    background: #00838F;
-    color: #fff;
+    background: #040404;
+    color: #f6ba06;
     font-weight: 500;
     width: 150px;
     border: 0px;
@@ -173,5 +173,5 @@ body{
 
 .floating-effect {
     animation: floatAnimation 2s ease-in-out infinite;
-    color: #007bff; /* Match the start button for visual consistency */
+    color: #ff9900; /* Match the start button for visual consistency */
 }
