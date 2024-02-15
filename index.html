@@ -53,28 +53,31 @@
     </style>
 </head>
 <body>
-<div class="app">
-    <h1 class="text-center">Kilkenny Cats Quiz</h1>
-    <!-- Start Game Button -->
-    <button id="start-btn" class="btn btn-primary mb-3">Start Game</button>
-    <!-- Quiz Container, initially hidden -->
-    <div class="quiz" style="display: none;">
-        <button id="timer" class="btn1" disabled>Time Left: 30s</button> <!-- Timer Button -->
-        <h2 id="question">Question goes here</h2>
-        <div id="answer-buttons" class="d-flex flex-column"></div>
-        <button id="next-btn" class="btn btn-info" style="display: none;">Next</button>
-    </div>
-    
-    <!-- Overlay for Leaderboard -->
-    <div id="leaderboard-overlay" onclick="hideLeaderboard()">
-        <div class="leaderboard" onclick="event.stopPropagation();">
-            <!-- Leaderboard content will be dynamically inserted here -->
+    <div class="app">
+        <h1 class="text-center">Kilkenny Cats Quiz</h1>
+        <!-- Floating Message -->
+        <p id="floating-message" class="text-center floating-effect">Guess as many right answers as you can!</p>
+        <!-- Start Game Button -->
+        <button id="start-btn" class="btn btn-primary mb-3">Start Game</button>
+        <!-- Quiz Container, initially hidden -->
+        <div class="quiz" style="display: none;">
+            <button id="timer" class="btn1" disabled>Time Left: 30s</button> <!-- Timer Button -->
+            <h2 id="question">Question goes here</h2>
+            <div id="answer-buttons" class="d-flex flex-column"></div>
+            <button id="next-btn" class="btn btn-info" style="display: none;">Next</button>
+        </div>
+        
+        <!-- Overlay for Leaderboard -->
+        <div id="leaderboard-overlay" onclick="hideLeaderboard()">
+            <div class="leaderboard" onclick="event.stopPropagation();">
+                <!-- Leaderboard content will be dynamically inserted here -->
+            </div>
+        </div>
+        <!-- Game Over Section, adjusted to only show after quiz end -->
+        <div id="game-over" style="display: none;">
         </div>
     </div>
-    <!-- Game Over Section, adjusted to only show after quiz end -->
-    <div id="game-over" style="display: none;">
-    </div>
-</div>
+    
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/popper.min.js" crossorigin="anonymous"></script>

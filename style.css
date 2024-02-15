@@ -165,3 +165,13 @@ body{
     background-color: #007bff;
     color: white;
 }
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.floating-effect {
+    animation: floatAnimation 2s ease-in-out infinite;
+    color: #007bff; /* Match the start button for visual consistency */
+}
