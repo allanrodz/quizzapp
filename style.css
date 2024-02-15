@@ -4,10 +4,8 @@
     height: 50px; /* Set the desired height */
     margin: 0 auto 20px; /* Center the button and add margin at the bottom */
     display: block; /* Ensure it's block level for margin auto to work */
-    color: white;
     font-weight: bold;
     border-radius: 25px; /* Adjust the border radius to control roundness */
-    background-color: #fcfafa; /* Red background color */
     text-align: center; /* Center the text horizontally */
     line-height: 50px; /* Center the text vertically within the button */
 }
@@ -15,14 +13,20 @@
 
 .timer-green {
     background-color: #4CAF50; /* Green */
+    color: rgb(6, 4, 4);
+
 }
 
 .timer-yellow {
     background-color: #ffad3b; /* Amber*/
+    color: rgb(6, 4, 4);
+
 }
 
 .timer-red {
     background-color: #F44336; /* Red */
+    color: rgb(6, 4, 4);
+
 }
 
 @keyframes blink {
