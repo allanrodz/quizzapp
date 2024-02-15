@@ -782,7 +782,7 @@ function endGame() {
         <div style="text-align: center;">
             <h2>Your score: ${score}</h2>
             <button class="btn btn-info" onclick="restartQuiz()">Play Again</button>
-            <button class="btn btn-secondary" onclick="showLeaderboardOverlay()">Leaderboard</button>
+            <button class="btn btn-secondary" onclick="showLeaderboardOverlay()" disabled style="opacity: 0.5; cursor: not-allowed;">Leaderboard</button><span style="color: #999; font-style: italic;"> (Coming Soon)</span>
         </div>
     `;
 
