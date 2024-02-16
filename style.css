@@ -1,3 +1,64 @@
+@keyframes pulseBackground {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.app {
+    position: relative;
+    height: 100%;
+    background-image: url('https://i.ibb.co/7kXGVTc/Whats-App-Image-2024-02-15-at-18-42-36-5907f190.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: pulseBackground 10s infinite;
+}
+
+#start-btn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    background-color: rgb(248, 144, 9);
+    color: rgb(14, 13, 13);
+    text-align: center;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+#leaderboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it sits above other content */
+}
+.leaderboard {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    cursor: auto;
+}
+
+#floating-message {
+    cursor: pointer; /* Optional: Changes the cursor to a pointer to indicate it's clickable */
+}
+
 .title-container {
     height: 8%;
     justify-content: center;

@@ -880,7 +880,7 @@ function wrongSound() {
     sound.play();
 }
 
-document.getElementById('start-btn').addEventListener('click', function() {
-    
+document.getElementById('floating-message').addEventListener('click', function() {
+    this.style.display = 'none';
 });
 
