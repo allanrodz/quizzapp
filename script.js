@@ -698,12 +698,37 @@ document.addEventListener('DOMContentLoaded', () => {
 function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
-    document.getElementById('start-btn').style.display = 'none';
+    timeLeft = 30; // Reset the timer
+    document.querySelector('.quiz-container').style.backgroundImage = 'none'; // Remove the background image again if needed
+    document.querySelector('.app-background').style.animation = 'none'; // Stop the pulsing animation effect if needed
+    document.getElementById('click-message').style.display = 'none'; // Hide the "Click to Start" message again if needed
+    document.querySelector('.quiz').style.display = 'block'; // Make sure the quiz container is shown
+    showQuestion(); // Display the first question
+    timer = setInterval(updateTimer, 1000); // Restart the timer
+}
+
+
+document.getElementById('click-message').addEventListener('click', function() {
+    currentQuestionIndex = 0;
+    score = 0;
+    // Stop the pulsing animation effect
+    // Remove the background image from the quiz-container
+    document.querySelector('.quiz-container').style.backgroundImage = 'none';
+
+    // Stop the pulsing animation effect
+    document.querySelector('.quiz-container').style.animation = 'none';
+
+
+    // Hide the "Click to Start" message
+    this.style.display = 'none';
+
+    // Show the quiz content if hidden
     document.querySelector('.quiz').style.display = 'block';
     showQuestion();
     timeLeft = 30; // Reset the timer each time the quiz starts
     timer = setInterval(updateTimer, 1000); // Start the timer, calling updateTimer every second
-}
+});
+
 
 function updateTimer() {
     timeLeft--;
@@ -791,9 +816,13 @@ function endGame() {
 }
 
 function restartQuiz() {
-    document.getElementById('game-over').style.display = 'none'; // Hide game over section
-    startQuiz(); // Restart the quiz
+    clearInterval(timer); // Stop any existing timer to prevent multiple instances
+    document.getElementById('game-over').style.display = 'none'; // Hide the game over section
+    document.getElementById('click-message').style.display = 'block'; // Show the "Click to Start" message again
+    // Optionally, reset other UI elements to their initial states here
+    startQuiz(); // Initialize the quiz again
 }
+
 
 
 
@@ -850,3 +879,8 @@ function wrongSound() {
     const sound = new Audio('sounds/wrong-answer.mp3');
     sound.play();
 }
+
+document.getElementById('start-btn').addEventListener('click', function() {
+    
+});
+

@@ -1,3 +1,48 @@
+.title-container {
+    height: 8%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+h1{
+font-weight: bold;
+}
+
+.quiz-container {
+    height: 80%;
+    background: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto 0;
+    border-radius: 10px;
+    padding: 0px;
+    border: 0px solid #ffffff;
+    background-image: url('https://i.ibb.co/7kXGVTc/Whats-App-Image-2024-02-15-at-18-42-36-5907f190.jpg');
+    background-size: cover; /* Ensures the background image covers the entire element */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    animation: pulseBackground 20s infinite;
+
+}
+
+
+.quiz-container h1{
+
+    color:#001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+
+}
+
+.app-background {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+
 
 .btn1 {
     width: 200px; /* Set the desired width */
@@ -9,6 +54,25 @@
     text-align: center; /* Center the text horizontally */
     line-height: 50px; /* Center the text vertically within the button */
 }
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+#click-message {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    font-size: 24px;
+    color: rgb(250, 164, 15);
+    font-family: 'Inter', sans-serif;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
 
 
 .timer-green {
@@ -49,23 +113,6 @@
 
 body{
     background: #ffffff;
-}
-
-.app{
-    background: #ffffff;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto 0;
-    border-radius: 10px;
-    padding: 0px;
-    border: 0px solid #ffffff;
-}
-
-.app h1{
-    color:#001e4d;
-    font-weight: 600;
-    border-bottom: 1px solid #333;
-    padding-bottom: 30px;
 }
 
 .quiz, #game-over{
@@ -174,4 +221,16 @@ body{
 .floating-effect {
     animation: floatAnimation 2s ease-in-out infinite;
     color: #ff9900; /* Match the start button for visual consistency */
+}
+
+.striped-line {
+    width: 50%;
+    height: 10px;
+    margin: 20px auto; /* Centers the line and provides some spacing */
+    background-image: linear-gradient(
+        to right, 
+        black 50%, 
+        rgb(250, 173, 6) 50%
+    );
+    background-size: 20px 10px; /* Controls the width of the stripes */
 }
