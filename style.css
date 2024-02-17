@@ -1,3 +1,63 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Align items horizontally */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Adjust based on your preference */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: Adds some shadow for depth */
+    border-radius: 10px; /* Optional: Rounds the corners */
+}
+
+/* Style adjustments for the input textbox */
+#username-input {
+    width: 80%; /* Does not fill the full size of the modal */
+    padding: 10px;
+    margin: 10px 0; /* Add some space above and below the input */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Rounded edges */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style adjustments for the save button */
+#save-username {
+    background-color: black; /* Black background */
+    color: #FFBF00; /* Amber/orange color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Slightly rounded edges for the button */
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Center the button */
+    text-transform: uppercase; /* Optional: Makes the button text uppercase */
+}
+
+/* Hover effect for the button */
+#save-username:hover {
+    opacity: 0.8; /* Slightly reduce opacity on hover */
+}
+
+
+
+
+
+
 @keyframes pulseBackground {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }

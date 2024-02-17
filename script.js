@@ -794,26 +794,47 @@ document.getElementById('next-btn').addEventListener('click', () => {
 
 function endGame() {
     clearInterval(timer); // Stop the timer
-    // Hide the quiz container
-    document.querySelector('.quiz').style.display = 'none';
+    document.querySelector('.quiz').style.display = 'none'; // Hide the quiz container
+    
+    // Show the custom modal to enter username
+    document.getElementById('username-modal').style.display = "block";
+    
+    // Setup save username button click event
+    document.getElementById("save-username").onclick = function() {
+        var username = document.getElementById('username-input').value;
+        if (username) {
+            saveScore(username, score);
+            // After saving score, hide the modal and clear the input
+            document.getElementById('username-modal').style.display = "none";
+            document.getElementById('username-input').value = '';
+            
+            // Show the game over section with the play again and leaderboard options
+            showGameOverSection();
+        }
+    };
 
-    // Prompt for username and save score
-    const username = prompt("Enter your username to save your score:");
-    if (username) saveScore(username, score);
+    // Close modal when clicking on the close button
+    document.getElementsByClassName("close-button")[0].onclick = function() {
+        document.getElementById('username-modal').style.display = "none";
+    };
 
-    // Prepare the Game Over section
-    const gameOverSection = document.getElementById('game-over');
-    gameOverSection.innerHTML = `
-        <div style="text-align: center;">
-            <h2>Your score: ${score}</h2>
-            <button class="btn btn-info" onclick="restartQuiz()">Play Again</button>
-            <button class="btn btn-secondary" onclick="showLeaderboardOverlay()" disabled style="opacity: 0.5; cursor: not-allowed;">Leaderboard</button><span style="color: #999; font-style: italic;"> (Coming Soon)</span>
-        </div>
-    `;
-
-    // Show the Game Over section
-    gameOverSection.style.display = 'block';
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('username-modal')) {
+            document.getElementById('username-modal').style.display = "none";
+        }
+    };
 }
+
+
+
+
+
+function showLeaderboardOverlay() {
+    displayLeaderboard(); // Make sure this function populates the leaderboard
+    document.getElementById('leaderboard-overlay').style.display = 'flex';
+}
+
 
 function restartQuiz() {
     clearInterval(timer); // Stop any existing timer to prevent multiple instances
@@ -884,3 +905,36 @@ document.getElementById('floating-message').addEventListener('click', function()
     this.style.display = 'none';
 });
 
+// Save username and show game over section
+document.getElementById("save-username").onclick = function() {
+    var username = document.getElementById('username-input').value.trim();
+    if (username) {
+        saveScore(username, score);
+    }
+    // Close the modal
+    document.getElementById('username-modal').style.display = "none";
+    // Show the game over section regardless of username input
+    showGameOverSection();
+};
+
+// Close modal when clicking outside and show game over section
+window.onclick = function(event) {
+    if (event.target == document.getElementById('username-modal')) {
+        document.getElementById('username-modal').style.display = "none";
+        // Ensure game over section is shown even if no username was entered
+        showGameOverSection();
+    }
+};
+
+// Function to show the game over section
+function showGameOverSection() {
+    const gameOverSection = document.getElementById('game-over');
+    gameOverSection.innerHTML = `
+        <div style="text-align: center;">
+            <h2>Your score: ${score}</h2>
+            <button class="btn btn-info" onclick="restartQuiz()">Play Again</button>
+            <button class="btn btn-secondary" onclick="showLeaderboardOverlay()">Leaderboard</button>
+        </div>
+    `;
+    gameOverSection.style.display = 'block';
+}
