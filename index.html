@@ -14,19 +14,18 @@
 
     <div class="container">
         <div class="search-bar">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search video by keywords...">
-            <button onclick="searchVideos()" class="btn btn-dark btn-sm">Search</button>
+            <input type="text" id="searchInput" class="form-control" placeholder="Search Video by Keywords...">
         </div>
         <div class="filter-buttons">
-            <button onclick="filterVideos('Interviews')" class="btn btn-dark btn-sm">Interviews</button>
-            <button onclick="filterVideos('Match Highlights')" class="btn btn-dark btn-sm">Match Highlights</button>
-
+            <button onclick="filterVideos('Interviews')" class="btn btn-dark btn-sm button-85" style="color: orange;">Interviews</button>
+            <button onclick="filterVideos('Match Highlights')" class="btn btn-dark btn-sm button-85" style="color: orange;">Match Hilights</button>
             <!-- Add more buttons for other video types -->
         </div>
         <div id="videoContainer" class="video-container">
             <!-- Video items will be dynamically added here -->
         </div>
     </div>
+    
     
 
     <script src="scripts.js"></script>
