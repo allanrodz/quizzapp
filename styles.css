@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.headerimg{
+    background-color: black;
+
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar button{
+    margin-top: 10px;
+    color:orange;
+    background-color: black;
+    width: 150px;
+
+}
+
+.filter-buttons button {
+    margin-right: 10px;
+    color:orange;
+    background-color: black;
+}
+
+.video-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('https://storage.needpix.com/rsynced_images/orange-black-stripes.jpg');
+    background-size: cover; /* Ensure the background image covers the entire container */
+    background-attachment: fixed; /* Ensure the background image remains fixed as the user scrolls */
+}
+
+.video-item {
+    margin: 10px 0;
+}
+
+.video-item iframe {
+    max-width: 100%;
+}
