@@ -76,12 +76,20 @@ body {
 }
 
 .video-item {
-    margin: 10px 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
 }
 
-.video-item iframe {
-    max-width: 100%;
+.fade-in {
+    opacity: 1;
 }
+
+
+.video-item iframe {
+    display: block; /* Make iframe a block element */
+    margin-top: 10px; /* Add margin to the top of the iframe */
+}
+
 
 
 

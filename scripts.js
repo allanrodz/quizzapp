@@ -11,6 +11,7 @@ const videos = [
 function displayVideos(videoList) {
     const container = document.getElementById('videoContainer');
     container.innerHTML = '';
+
     videoList.forEach((video, index) => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
@@ -46,8 +47,29 @@ function displayVideos(videoList) {
 
         container.appendChild(videoItem);
     });
+
+    // Add class to the first video item to make it visible by default
+    const firstVideoItem = container.querySelector('.video-item');
+    if (firstVideoItem) {
+        firstVideoItem.classList.add('fade-in');
+    }
 }
 
+
+function fadeInVideosOnScroll() {
+    const videoItems = document.querySelectorAll('.video-item');
+    
+    videoItems.forEach(videoItem => {
+        const top = videoItem.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (top < windowHeight * 0.75) {
+            videoItem.classList.add('fade-in');
+        }
+    });
+}
+
+window.addEventListener('scroll', fadeInVideosOnScroll);
 
 
 
