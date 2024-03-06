@@ -90,3 +90,21 @@ document.getElementById('searchInput').addEventListener('input', function(event)
 
 // Display all videos initially
 displayVideos(videos);
+
+// Function to scroll to the top of the page
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Function to toggle visibility of back-to-top button based on scroll position
+window.addEventListener('scroll', function() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (window.scrollY > 200) {
+        scrollToTopBtn.style.display = 'block';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+});
