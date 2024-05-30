@@ -617,12 +617,10 @@ function showQuestion() {
     });
 }
 
-
 let currentQuestionIndex = 0;
 let score = 0;
 let timer;
-let timeLeft = 30; // 30 seconds for the countdown
-
+let timeLeft = 60; // 60 seconds for the countdown
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-btn').addEventListener('click', startQuiz);
@@ -634,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
-    timeLeft = 30; // Reset the timer
+    timeLeft = 60; // Reset the timer
     document.querySelector('.quiz-container').style.backgroundImage = 'none'; // Remove the background image again if needed
     document.querySelector('.app-background').style.animation = 'none'; // Stop the pulsing animation effect if needed
     document.getElementById('click-message').style.display = 'none'; // Hide the "Click to Start" message again if needed
@@ -642,7 +640,6 @@ function startQuiz() {
     showQuestion(); // Display the first question
     timer = setInterval(updateTimer, 1000); // Restart the timer
 }
-
 
 document.getElementById('click-message').addEventListener('click', function() {
     currentQuestionIndex = 0;
@@ -654,17 +651,15 @@ document.getElementById('click-message').addEventListener('click', function() {
     // Stop the pulsing animation effect
     document.querySelector('.quiz-container').style.animation = 'none';
 
-
     // Hide the "Click to Start" message
     this.style.display = 'none';
 
     // Show the quiz content if hidden
     document.querySelector('.quiz').style.display = 'block';
     showQuestion();
-    timeLeft = 30; // Reset the timer each time the quiz starts
+    timeLeft = 60; // Reset the timer each time the quiz starts
     timer = setInterval(updateTimer, 1000); // Start the timer, calling updateTimer every second
 });
-
 
 function updateTimer() {
     timeLeft--;
@@ -675,13 +670,13 @@ function updateTimer() {
     timerElement.classList.remove('timer-green', 'timer-yellow', 'timer-red', 'timer-blink');
 
     // Apply new class based on the time left
-    if (timeLeft > 20) {
+    if (timeLeft > 40) {
         timerElement.classList.add('timer-green');
-    } else if (timeLeft > 10 && timeLeft <= 20) {
+    } else if (timeLeft > 20 && timeLeft <= 40) {
         timerElement.classList.add('timer-yellow');
-    } else if (timeLeft > 5 && timeLeft <= 10) {
+    } else if (timeLeft > 10 && timeLeft <= 20) {
         timerElement.classList.add('timer-red');
-    } else if (timeLeft <= 5) {
+    } else if (timeLeft <= 10) {
         timerElement.classList.add('timer-red', 'timer-blink');
     }
 
@@ -691,11 +686,11 @@ function updateTimer() {
     }
 }
 
-
 function selectAnswer(correct, button) {
     // Play sound based on the correctness of the selected answer
     if (correct) {
         score++;
+        timeLeft += 5; // Add 5 seconds for a correct answer
         dingSound();
         button.classList.add('correct');
     } else {
@@ -720,8 +715,6 @@ function selectAnswer(correct, button) {
     // Show the next button
     document.getElementById('next-btn').style.display = 'block';
 }
-
-
 
 document.getElementById('next-btn').addEventListener('click', () => {
     currentQuestionIndex++;
@@ -759,9 +752,6 @@ function restartQuiz() {
     startQuiz(); // Initialize the quiz again
 }
 
-
-
-
 function displayEndGameOptions() {
     // Optionally prompt for username and save score here if needed
     document.getElementById('game-over').style.display = 'block';
@@ -778,18 +768,15 @@ function saveScore(username, score) {
     displayLeaderboard(); // Refresh the leaderboard display
 }
 
-
 function showLeaderboardOverlay() {
     const overlay = document.getElementById('leaderboard-overlay');
     overlay.style.display = 'flex';
     displayLeaderboard(); // Make sure this function populates the leaderboard
 }
 
-
 function hideLeaderboard() {
     document.getElementById('leaderboard-overlay').style.display = 'none';
 }
-
 
 function displayLeaderboard() {
     const leaderboardDiv = document.querySelector('#leaderboard-overlay .leaderboard');
@@ -803,7 +790,6 @@ function displayLeaderboard() {
     leaderboardHTML += '</tbody></table>';
     leaderboardDiv.innerHTML = leaderboardHTML;
 }
-
 
 // Sounds
 function dingSound() {
