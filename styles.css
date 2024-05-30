@@ -1,206 +1,357 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
-.headerimg{
-    background-color: black;
-
-}
-
-
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-
-.search-bar {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin-bottom: 20px;
-}
-
-.search-bar input {
-    flex: 1;
-}
-
-.search-bar input::placeholder {
-    text-align: center;
-    font-weight: bold;
-}
-
-.search-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    animation: pulse 2s ease-in-out infinite; /* Add pulse animation */
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.search-btn img {
-    width: 100px;
-    height: 100px;
-    margin-right: 5px;
-}
-
-
-.filter-buttons button {
-    margin-right: 10px;
-    color:orange;
-    background-color: black;
-}
-
-.video-container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background-image: url('https://storage.needpix.com/rsynced_images/orange-black-stripes.jpg'); */
-    background-size: cover; /* Ensure the background image covers the entire container */
-    background-attachment: fixed; /* Ensure the background image remains fixed as the user scrolls */
-}
-
-.video-item {
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
-
-.fade-in {
-    opacity: 1;
-}
-
-
-.video-item iframe {
-    display: block; /* Make iframe a block element */
-    margin-top: 10px; /* Add margin to the top of the iframe */
-}
-
-
-
-
-/* CSS */
-.button-85 {
-  padding: 0.6em 2em;
-  border: none;
-  outline: none;
-  color: rgb(255, 255, 255);
-  background: #111;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  font-weight: bold;
-}
-
-.button-85:before {
-  content: "";
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing-button-85 20s linear infinite;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
-}
-
-@keyframes glowing-button-85 {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-.button-85:after {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #222;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.animated-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: orange;
-    animation: pulse 5.5s ease-in-out infinite;
-}
-
-.back-to-top-btn {
+.modal {
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 24px;
-    color: orange;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 1000;
-    background-color: black; /* Background color for the button */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Align items horizontally */
 }
 
-.back-to-top-btn:hover {
-    background-color: black; /* Hover background color */
-    color: orange;
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Adjust based on your preference */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: Adds some shadow for depth */
+    border-radius: 10px; /* Optional: Rounds the corners */
+}
+
+/* Style adjustments for the input textbox */
+#username-input {
+    width: 80%; /* Does not fill the full size of the modal */
+    padding: 10px;
+    margin: 10px 0; /* Add some space above and below the input */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Rounded edges */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style adjustments for the save button */
+#save-username {
+    background-color: black; /* Black background */
+    color: #FFBF00; /* Amber/orange color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Slightly rounded edges for the button */
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Center the button */
+    text-transform: uppercase; /* Optional: Makes the button text uppercase */
+}
+
+/* Hover effect for the button */
+#save-username:hover {
+    opacity: 0.8; /* Slightly reduce opacity on hover */
+}
+
+
+
+
+
+
+@keyframes pulseBackground {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.app {
+    position: relative;
+    height: 100%;
+    background-image: url('https://i.ibb.co/7kXGVTc/Whats-App-Image-2024-02-15-at-18-42-36-5907f190.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: pulseBackground 10s infinite;
+}
+
+#start-btn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    background-color: rgb(248, 144, 9);
+    color: rgb(14, 13, 13);
+    text-align: center;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+#leaderboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it sits above other content */
+}
+.leaderboard {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    cursor: auto;
+}
+
+#floating-message {
+    cursor: pointer; /* Optional: Changes the cursor to a pointer to indicate it's clickable */
+}
+
+.title-container {
+    height: 12%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+h1{
+font-weight: bold;
+}
+
+.quiz-container {
+    height: 80%;
+    background: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto 0;
+    border-radius: 10px;
+    padding: 0px;
+    border: 0px solid #ffffff;
+    background-image: url('https://i.ibb.co/7kXGVTc/Whats-App-Image-2024-02-15-at-18-42-36-5907f190.jpg');
+    background-size: cover; /* Ensures the background image covers the entire element */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    animation: pulseBackground 20s infinite;
+
+}
+
+
+.quiz-container h1{
+
+    color:#001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+
+}
+
+.app-background {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.btn1 {
+    width: 200px; /* Set the desired width */
+    height: 50px; /* Set the desired height */
+    margin: 0 auto 20px; /* Center the button and add margin at the bottom */
+    display: block; /* Ensure it's block level for margin auto to work */
+    font-weight: bold;
+    border-radius: 25px; /* Adjust the border radius to control roundness */
+    text-align: center; /* Center the text horizontally */
+    line-height: 50px; /* Center the text vertically within the button */
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+#click-message {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    font-size: 24px;
+    color: rgb(250, 164, 15);
+    font-family: 'Inter', sans-serif;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+
+
+.timer-green {
+    background-color: #4CAF50; /* Green */
+    color: rgb(6, 4, 4);
+
+}
+
+.timer-yellow {
+    background-color: #ffad3b; /* Amber*/
+    color: rgb(6, 4, 4);
+
+}
+
+.timer-red {
+    background-color: #F44336; /* Red */
+    color: rgb(6, 4, 4);
+
+}
+
+@keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+.timer-blink {
+    animation: blink 1s linear infinite;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'sans-serif';
+    box-sizing: border-box;
+}
+
+body{
+    background: #ffffff;
+}
+
+.quiz, #game-over{
+    padding: 20px 0;
+}
+
+.quiz h2, #game-over h2{
+    font-size: 18px;
+    color: #001e4d;
+    font-weight: 600;
+}
+
+.btn{
+    background: #fda21a;
+    color: #fefefe;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover:not([disabled]){
+    background: #00838F;
+    color: #fff;
+}
+
+.btn:disabled{
+    cursor: no-drop;
+}
+
+#next-btn, #game-over button{
+    background: #040404;
+    color: #f6ba06;
+    font-weight: 500;
+    width: 150px;
+    border: 0px;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+}
+
+.quiz .btn.correct {
+    background-color: green;
+    color: white;
+}
+
+.quiz .btn.incorrect {
+    background-color: red;
+    color: white;
+}
+
+
+/* Overlay styles */
+#leaderboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Darker overlay for better focus */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* High z-index to ensure it's above everything else */
+}
+
+.leaderboard {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 80%; /* Responsive width */
+    max-width: 500px; /* Max width to ensure it doesn't get too large */
+    position: relative; /* For positioning close button or additional styling */
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.leaderboard th {
+    background-color: #007bff;
+    color: white;
+}
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.floating-effect {
+    animation: floatAnimation 2s ease-in-out infinite;
+    color: #ff9900; /* Match the start button for visual consistency */
+}
+
+.striped-line {
+    width: 50%;
+    height: 10px;
+    margin: 20px auto; /* Centers the line and provides some spacing */
+    background-image: linear-gradient(
+        to right, 
+        black 50%, 
+        rgb(250, 173, 6) 50%
+    );
+    background-size: 20px 10px; /* Controls the width of the stripes */
 }
